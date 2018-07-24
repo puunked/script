@@ -40,7 +40,7 @@ echo "";
 
 echo "------------------------------------------------"
 echo " Multi Login = kill "
-echo " Cara pakai : kill [nombor PID] "
+echo " Como usar : kill [nombor PID] "
 echo "------------------------------------------------"
 
 echo "";
