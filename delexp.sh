@@ -23,12 +23,12 @@ echo $diff | grep -q ^\- && echo okay && continue
 printf ""
 
 # it will ask every user that will deleted, if you want to disable the feature you can add "#" in 3 lines
-read -r -p "Are you sure you want to delete this user? [y/N] " response
+read -r -p "Tem certeza que deseja excluir este usuário? [y/N] " response
 if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
 then
 
 # got this far, account must have expired
-echo deleting $user ...
+echo excluindo $user ...
 
 # deleting user
 userdel -r $user
