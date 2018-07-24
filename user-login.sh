@@ -2,9 +2,9 @@
 
 data=( `ps aux | grep -i dropbear | awk '{print $2}'`);
 
-echo "-----------------------";
-echo "Checking Dropbear login";
-echo "-----------------------";
+echo "----------------------------";
+echo "Verificando Dropbear logados";
+echo "----------------------------";
 
 for PID in "${data[@]}"
 do
@@ -21,9 +21,9 @@ echo "";
 
 data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
 
-echo "----------------------";
-echo "Checking OpenSSH login";
-echo "----------------------";
+echo "---------------------------";
+echo "Verificando OpenSSH logados";
+echo "---------------------------";
 
 for PID in "${data[@]}"
 do
@@ -40,7 +40,7 @@ echo "";
 
 echo "------------------------------------------------"
 echo " Multi Login = kill "
-echo " Como usar : kill [nombor PID] "
+echo " Como usar : kill [o número PID] "
 echo "------------------------------------------------"
 
 echo "";
