@@ -1,10 +1,10 @@
 #!/bin/bash
 
-read -p "Nama user SSH yang akan dihapus : " Pengguna
+read -p "O nome do usuário do SSH será excluído : " Usuários
 
-if getent passwd $Pengguna > /dev/null 2>&1; then
-        userdel $Pengguna
-        echo -e "User $Pengguna telah dihapus."
+if getent passwd $Usuários > /dev/null 2>&1; then
+        userdel $Usuários
+        echo -e "User $Usuários foi eliminado."
 else
-        echo -e "GAGAL: User $Pengguna tidak ada."
+        echo -e "GAGAL: User $Usuário está faltando."
 fi
