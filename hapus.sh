@@ -1,10 +1,10 @@
 #!/bin/bash
 
-read -p "O nome do usuário do SSH será excluído : " Usuários
+read -p "O nome do usuário do SSH será excluído : " User
 
-if getent passwd $Usuários > /dev/null 2>&1; then
-        userdel $Usuários
-        echo -e "User $Usuários foi eliminado."
+if getent passwd $User > /dev/null 2>&1; then
+        userdel $User
+        echo -e "Usuário $User foi excluído."
 else
-        echo -e "GAGAL: User $Usuário está faltando."
+        echo -e "FALHOU: Usuário $User está faltando."
 fi
