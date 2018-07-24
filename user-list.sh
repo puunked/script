@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "-------------------------------"
-echo "USERNAME          EXP DATE     "
+echo "NOME DE USUÁRIO   VALIDADE     "
 echo "-------------------------------"
 while read expired
 do
