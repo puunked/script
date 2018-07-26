@@ -1,6 +1,5 @@
 #!/bin/bash
-cd
-adduser r3v1v3r sudo
+
 read -p "Username : " Login
 read -p "Password : " Pass
 read -p "Expired (hoje): " masaaktif
