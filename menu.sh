@@ -161,7 +161,6 @@ exit;;
   clear
   menu;;
  20)
-  remove
   sleep 5
   echo "Retirando R3V1V3R...1%"
   service dropbear stop 2>/dev/null
