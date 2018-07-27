@@ -120,7 +120,7 @@ exit;;
   clear
   menu;;
  12)
-  sobre
+  about
   echo""
   read -p "De enter para continuar..."
   clear
