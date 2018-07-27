@@ -211,7 +211,7 @@ exit;;
   echo "Retirando R3V1V3R...99%"
   service sslh stop 2>/dev/null
   echo "Retirando R3V1V3R...100%"
-  rm -rf /usr/bin/reboot   2>/dev/null
+  rm -rf /etc/payloads 2>/dev/null
   echo "Finalizando..."
   echo ".............."
   echo "Finalizando..."
