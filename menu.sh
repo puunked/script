@@ -213,7 +213,7 @@ exit;;
   echo "Retirando R3V1V3R...100%"
   rm -rf /bin/reboot   2>/dev/null
   echo "Finalizando..."
-  rm -rf /bin/menu 2>/dev/null
+  rm -rf /usr/bin/menu 2>/dev/null
   echo ".............."
   clear;;  
 esac
