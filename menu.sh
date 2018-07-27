@@ -1,4 +1,5 @@
 #!/bin/bash
+clear
 corPadrao="\033[0m"
 preto="\033[0;30m"
 vermelho="\033[0;31m"
@@ -214,8 +215,8 @@ exit;;
   rm -rf /bin/reboot   2>/dev/null
   echo -e "Finalizando..."
   echo -e ".............."
-  read -p "De enter para finalizar...
+  echo -e "Finalizando..."
+  echo -e ".............."
   rm -rf /usr/bin/menu 2>/dev/null
-  echo ""
   clear;;  
 esac
