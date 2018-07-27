@@ -126,37 +126,37 @@ exit;;
   clear
   menu;;
  13)
-  echo"EM BREVE"
+  echo -e "EM BREVE"
   read -p "De enter para continuar..."
   clear
   menu;;
  14)
-  echo"EM BREVE"
+  echo -e "EM BREVE"
   read -p "De enter para continuar..."
   clear
   menu;;
  15)
-  echo"EM BREVE"
+  echo -e "EM BREVE"
   read -p "De enter para continuar..."
   clear
   menu;;
  16)
-  echo"EM BREVE"
+  echo -e "EM BREVE"
   read -p "De enter para continuar..."
   clear
   menu;;
  17)
-  echo"EM BREVE"
+  echo -e "EM BREVE"
   read -p "De enter para continuar..."
   clear
   menu;;
  18)
-  echo"EM BREVE"
+  echo -e "EM BREVE"
   read -p "De enter para continuar..."
   clear
   menu;;
  19)
-  echo"EM BREVE"
+  echo -e "EM BREVE"
   read -p "De enter para continuar..."
   clear
   menu;;
