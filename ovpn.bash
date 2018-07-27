@@ -61,21 +61,36 @@ cianof="\033[01;46m"
 brancof="\033[01;47m"
 #END-COLORS BASH
 
+touch /root/openclientes.db
+mkdir /home/loginslimitados/
+mkdir /root/arquivosopenvpn/
+mkdir /home/opencliente/
+mkdir /home/vps/public_html/openvpn
+chmod -R 755 /home/vps/public_html/
+touch /etc/r3v1v3r/backupOpenclientes.db
+touch /etc/pam.d/openvpn
+echo "
+auth    required        pam_unix.so    shadow    nodelay
+auth    requisite       pam_succeed_if.so uid >= 500 quiet
+#auth    requisite       pam_succeed_if.so user ingroup openclient quiet
+account required        pam_unix.so" >> /etc/pam.d/openvpn
+clear
+
 newclient () {
 	# Generates the custom client.ovpn
-	cp /etc/openvpn/client-common.txt ~/$1.ovpn
-	echo "<ca>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/$1.ovpn
-	echo "</ca>" >> ~/$1.ovpn
-	echo "<cert>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/$1.ovpn
-	echo "</cert>" >> ~/$1.ovpn
-	echo "<key>" >> ~/$1.ovpn
-	cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/$1.ovpn
-	echo "</key>" >> ~/$1.ovpn
-	echo "<tls-auth>" >> ~/$1.ovpn
-	cat /etc/openvpn/ta.key >> ~/$1.ovpn
-	echo "</tls-auth>" >> ~/$1.ovpn
+	cp /etc/openvpn/client-common.txt ~/arquivosopenvpn/$1.ovpn
+	echo "<ca>" >> ~/arquivosopenvpn/$1.ovpn
+	cat /etc/openvpn/easy-rsa/pki/ca.crt >> ~/arquivosopenvpn/$1.ovpn
+	echo "</ca>" >> ~/arquivosopenvpn/$1.ovpn
+	echo "<cert>" >> ~/arquivosopenvpn/$1.ovpn
+	cat /etc/openvpn/easy-rsa/pki/issued/$1.crt >> ~/arquivosopenvpn/$1.ovpn
+	echo "</cert>" >> ~/arquivosopenvpn/$1.ovpn
+	echo "<key>" >> ~/arquivosopenvpn/$1.ovpn
+	cat /etc/openvpn/easy-rsa/pki/private/$1.key >> ~/arquivosopenvpn/$1.ovpn
+	echo "</key>" >> ~/arquivosopenvpn/$1.ovpn
+	echo "<tls-auth>" >> ~/arquivosopenvpn/$1.ovpn
+	cat /etc/openvpn/ta.key >> ~/arquivosopenvpn/$1.ovpn
+	echo "</tls-auth>" >> ~/arquivosopenvpn/$1.ovpn
 }
 
 # Try to get our IP from the system and fallback to the Internet.
@@ -94,7 +109,7 @@ else
 	if echo $(id) |grep sudo > /dev/null
 	then
 	clear
-	echo "Voce não é root"
+	echo "Voce nÃ£o Ã© root"
 	echo "Seu usuario esta no grupo sudo"
 	echo -e "Para virar root execute \033[1;31msudo su\033[0m"
 	exit
@@ -106,34 +121,35 @@ else
 fi
 
 clear
-echo -e "\033[36;37m PAINEL DE GERENCIAMENTO DO OPENVPN, OS ARQUIVOS SERÃO SALVOS NA PASTA ROOT\033[0m"
+echo -e "\033[36;37m PAINEL DE GERENCIAMENTO DO OPENVPN, OS ARQUIVOS SERÃƒO SALVOS NA PASTA ROOT\033[0m"
+echo -e "\033[01;33m R3V1V3R 1NT3RN3T L1VR3 by @judiba"
 echo -e "\033[01;31m BY @e8th4eve, @Fenix_linuxr"
-echo -e "\033[01;31m Modificações e adaptações por Kingsman"
+echo -e "\033[01;31m ModificaÃ§Ãµes e adaptaÃ§Ãµes por Kingsman"
 echo -e "\033[0;35m------------------------------------------------------------\033[0m"
-echo -e "\033[1;36m[\033[1;31m1\033[1;36m] CRIAR USUÁRIO \033[1;30m(CRIA USUÁRIOS)\033[1;36m
-[\033[1;31m2\033[1;36m] REMOVER USUÁRIO \033[1;30m(REMOVE UM USUÁRIO)\033[1;36m
-[\033[1;31m3\033[1;36m] REMOVER TODOS OS USUÁRIOS \033[1;30m(REMOVE TODOS OS USUÁRIOS)\033[1;36m
+echo -e "\033[1;36m[\033[1;31m1\033[1;36m] CRIAR USUÃRIO \033[1;30m(CRIA USUÃRIOS)\033[1;36m
+[\033[1;31m2\033[1;36m] REMOVER USUÃRIO \033[1;30m(REMOVE UM USUÃRIO)\033[1;36m
+[\033[1;31m3\033[1;36m] REMOVER TODOS OS USUÃRIOS \033[1;30m(REMOVE TODOS OS USUÃRIOS)\033[1;36m
 [\033[1;31m4\033[1;36m] REMOVER OPENVPN \033[1;30m(DESINSTALA O OPENVPN)\033[1;36m
-[\033[1;31m5\033[1;36m] ELIMINAR VENCIDOS \033[1;30m(ELIMINA TODOS OS USUÁRIOS VENCIDOS)\033[1;36m
-[\033[1;31m6\033[1;36m] MUDAR DATA DE UM USUÁRIO \033[1;30m(ALTERA A DATA DE VENCIMENTO DE UM USUÁRIO)\033[1;36m
-[\033[1;31m7\033[1;36m] EDITAR USUÁRIO \033[1;30m(MUDA A CONFIGURAÇÃO DE UM CLIENTE GERADO)\033[1;36m
-[\033[1;31m8\033[1;36m] MONITOR DE USUÁRIOS OPENVPN \033[1;30m(MONITORA OS CLIENTES GERADOS)\033[1;36m
-[\033[1;31m9\033[1;36m] REINICIAR OPENVPN\033[1;30m(REINICIA OS SERVIÇOS OPENVPN)\033[1;36m
+[\033[1;31m5\033[1;36m] ELIMINAR VENCIDOS \033[1;30m(ELIMINA TODOS OS USUÃRIOS VENCIDOS)\033[1;36m
+[\033[1;31m6\033[1;36m] MUDAR DATA DE UM USUÃRIO \033[1;30m(ALTERA A DATA DE VENCIMENTO DE UM USUÃRIO)\033[1;36m
+[\033[1;31m7\033[1;36m] EDITAR USUÃRIO \033[1;30m(MUDA A CONFIGURAÃ‡ÃƒO DE UM CLIENTE GERADO)\033[1;36m
+[\033[1;31m8\033[1;36m] MONITOR DE USUÃRIOS OPENVPN \033[1;30m(MONITORA OS CLIENTES GERADOS)\033[1;36m
+[\033[1;31m9\033[1;36m] REINICIAR OPENVPN\033[1;30m(REINICIA OS SERVIÃ‡OS OPENVPN)\033[1;36m
 [\033[1;31m0\033[1;36m] VOLTAR \033[1;30m(RETORNA AO MENU PRINCIPAL)\033[0m"
 echo -e "\033[0;35m------------------------------------------------------------\033[0m"
-echo -e "\033[1;36mO QUÊ DESEJA FAZER?\033[0m"
+echo -e "\033[1;36mO QUÃŠ DESEJA FAZER?\033[0m"
 read -p ": " opcao
 
 case $opcao in
   1) 
 echo -e "\033[1;33m"
-echo "NOME DO NOVO USUÁRIO?"
-echo -e "\033[1;31mUse somente o nome sem caracteres especiais | Este usuário também pode ser usado para SSH!\033[0m"
-read -p "Nome do usuário: " CLIENT
+echo "NOME DO NOVO USUÃRIO?"
+echo -e "\033[1;31mUse somente o nome sem caracteres especiais | Este usuÃ¡rio tambÃ©m pode ser usado para SSH!\033[0m"
+read -p "Nome do usuÃ¡rio: " CLIENT
 awk -F : ' { print $1 }' /etc/passwd > /tmp/users
 if grep -Fxq "$CLIENT" /tmp/users
 then
-echo -e "\033[1;31mUsuário ja existente em seu servidor!\033[0m"
+echo -e "\033[1;31mUsuÃ¡rio ja existente em seu servidor!\033[0m"
 sleep 5s
 ovpn
 exit
@@ -145,38 +161,38 @@ cd /etc/openvpn/easy-rsa/
 ./easyrsa build-client-full $CLIENT nopass
 newclient "$CLIENT"
 echo ""
-echo "Client $CLIENT KEY DISPONÍVEL" ~/"$CLIENT.ovpn"
+echo "Client $CLIENT KEY DISPONÃVEL" ~/"$CLIENT.ovpn"
 #####Sistema datagem
 echo -e "\033[1;31mDefinir tempo de validade(em dias)? 
 [s/n]\033[0m"
 read -p ": " simounao
 if [ "$simounao" = "s" ]
 then
-echo -e "\033[1;32mQuantos dias usuário $CLIENT deve durar:\033[0;37m"
+echo -e "\033[1;32mQuantos dias usuÃ¡rio $CLIENT deve durar:\033[0;37m"
 read -p " " daysrnf
 echo -e "\033[0m"
 valid=$(date '+%C%y-%m-%d' -d " +$daysrnf days")
 datexp=$(date "+%d/%m/%Y" -d "+ $daysrnf days")
 useradd -M -s /bin/false -d /home/ovpn/ $CLIENT -e $valid
 usermod -p $(openssl passwd -1 $senha) $CLIENT
-touch /etc/VpsPackdir/senha/$CLIENT
-touch /etc/VpsPackdir/limite/$CLIENT
-echo -e "$senha" > /etc/VpsPackdir/senha/$CLIENT
-echo -e "OPENVPN" > /etc/VpsPackdir/limite/$CLIENT
+touch /etc/r3v1v3r/senha/$CLIENT
+touch /etc/rev1v3r/limite/$CLIENT
+echo -e "$senha" > /etc/r3v1v3r/senha/$CLIENT
+echo -e "OPENVPN" > /etc/r3v1v3r/limite/$CLIENT
 echo -e "\033[1;36mCRIADO COM SUCESSO \033[0m"
-echo -e "\033[1;36mPara encontrar o arquivo vá no menu do ADM>2>8 \033[0m"
+echo -e "\033[1;36mPara encontrar o arquivo vÃ¡ no menu do ADM>2>8 \033[0m"
 sleep 4s
 ovpn
 exit
   else
 useradd -M -s /bin/false -d /home/ovpn/ $CLIENT
 usermod -p $(openssl passwd -1 $senha) $CLIENT
-touch /etc/VpsPackdir/senha/$CLIENT
-touch /etc/VpsPackdir/limite/$CLIENT
-echo -e "$senha" > /etc/VpsPackdir/senha/$CLIENT
-echo -e "OPENVPN" > /etc/VpsPackdir/limite/$CLIENT
+touch /etc/r3v1v3r/senha/$CLIENT
+touch /etc/r3v1v3r/limite/$CLIENT
+echo -e "$senha" > /etc/r3v1v3r/senha/$CLIENT
+echo -e "OPENVPN" > /etc/r3v1v3r/limite/$CLIENT
 echo -e "\033[1;36mCRIADO COM SUCESSO \033[0m"
-echo -e "\033[1;36mPara encontrar o arquivo vá no menu do ADM>2>8 \033[0m"
+echo -e "\033[1;36mPara encontrar o arquivo vÃ¡ no menu>2>8 \033[0m"
 ovpn
 exit
 fi
@@ -186,23 +202,23 @@ echo -e "\033[1;33m"
 NUMBEROFCLIENTS=$(tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep -c "^V")
 if [[ "$NUMBEROFCLIENTS" = '0' ]]; then
 echo ""
-echo "NÃO HÁ USUÁRIOS AINDA"
+echo "NÃƒO HÃ USUÃRIOS AINDA"
 echo -e "\033[0m"
 ovpn
 exit
 	fi
 echo -e "\033[1;36m"
-echo "Selecione um usuário para remover"
+echo "Selecione um usuÃ¡rio para remover"
 tail -n +2 /etc/openvpn/easy-rsa/pki/index.txt | grep "^V" | cut -d '=' -f 2 | nl -s ') '
 if [[ "$NUMBEROFCLIENTS" = '1' ]]; then
-read -p "Selecione um usuário [1]: " CLIENTNUMBER
+read -p "Selecione um usuÃ¡rio [1]: " CLIENTNUMBER
 else
-read -p "Selecione um usuário [1-$NUMBEROFCLIENTS]: " CLIENTNUMBER
+read -p "Selecione um usuÃ¡rio [1-$NUMBEROFCLIENTS]: " CLIENTNUMBER
 fi
 if [ "$CLIENTNUMBER" = "" ]
 then
 echo -e "\033[1;31m"
-echo "NENHUM USUÁRIO FOI SELECIONADO"
+echo "NENHUM USUÃRIO FOI SELECIONADO"
 echo -e "\033[0m"
 sleep 4s
 ovpn
@@ -220,8 +236,8 @@ cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
 chown nobody:$GROUPNAME /etc/openvpn/crl.pem
 echo ""
 userdel --force $CLIENT
-rm -rf /etc/VpsPackdir/senha/$CLIENT
-rm -rf /etc/VpsPackdir/limite/$CLIENT
+rm -rf /etc/r3v1v3r/senha/$CLIENT
+rm -rf /etc/r3v1v3r/limite/$CLIENT
 echo -e "\033[1;31m"
 echo "REMOVIDO"
 echo -e "\033[0m"
@@ -249,8 +265,8 @@ cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
 chown nobody:$GROUPNAME /etc/openvpn/crl.pem
 echo ""
 userdel --force $userss
-rm -rf /etc/VpsPackdir/senha/$userss
-rm -rf /etc/VpsPackdir/limite/$userss
+rm -rf /etc/r3v1v3r/senha/$userss
+rm -rf /etc/r3v1v3r/limite/$userss
 done
 echo -e "\033[1;31m------------------------------------------------------------\033[0m"
 echo "REMOVIDOS"
@@ -262,7 +278,7 @@ ovpn
 exit;;
   4) 
 			echo ""
-read -p "Você realmente deseja remover o OpenVPN? [y/n]: " -e -i n REMOVE
+read -p "VocÃª realmente deseja remover o OpenVPN? [y/n]: " -e -i n REMOVE
 if [[ "$REMOVE" = 'y' ]]; then
 PORT=$(grep '^port ' /etc/openvpn/server.conf | cut -d " " -f 2)
 PROTOCOL=$(grep '^proto ' /etc/openvpn/server.conf | cut -d " " -f 2)
@@ -286,7 +302,7 @@ iptables -t nat -D POSTROUTING -s 10.8.0.0/24 -j SNAT --to $IP
 sed -i '/iptables -t nat -A POSTROUTING -s 10.8.0.0\/24 -j SNAT --to /d' $RCLOCAL
 if hash sestatus 2>/dev/null; then
 if sestatus | grep "Current mode" | grep -qs "enforcing"; then
-if [[ "$PORT" != '1194' || "$PROTOCOL" = 'tcp' ]]; then
+if [[ "$PORT" != '8090' || "$PROTOCOL" = 'tcp' ]]; then
 semanage port -d -t openvpn_port_t -p $PROTOCOL $PORT
 	fi
  fi
@@ -304,7 +320,7 @@ adm
 exit
 else
 echo ""
-echo "Remoção abordada!"
+echo "RemoÃ§Ã£o abordada!"
 fi
 adm
 exit;;
@@ -320,7 +336,7 @@ exit;;
 cat /etc/passwd |grep ovpn > /tmp/ovpn
 datenow=$(date +%s)
 tput setaf 7 ; tput setab 2 ; tput bold ; printf '%45s%-10s%-5s\n' "Removedor de contas expiradas" ""
-printf '%-20s%-25s%-20s\n' "Usuário" "Data de expiração" "Estado/Ação" ; echo "" ; tput sgr0
+printf '%-20s%-25s%-20s\n' "UsuÃ¡rio" "Data de expiraÃ§Ã£o" "Estado/AÃ§Ã£o" ; echo "" ; tput sgr0
 for user in $(awk -F: '{print $1}' /tmp/ovpn); do
 	expdate=$(chage -l $user|awk -F: '/Account expires/{print $2}')
 	echo $expdate|grep -q never && continue
@@ -329,7 +345,7 @@ for user in $(awk -F: '{print $1}' /tmp/ovpn); do
 	expsec=$(date +%s --date="$expdate")
 	diff=$(echo $datenow - $expsec|bc -l)
 	tput setaf 2 ; tput bold
-	echo $diff|grep -q ^\- && echo "Ativo (Não removido)" && continue
+	echo $diff|grep -q ^\- && echo "Ativo (NÃ£o removido)" && continue
 	tput setaf 1 ; tput bold
 echo "Expirado (Removido)"
 cd /etc/openvpn/easy-rsa/
@@ -342,8 +358,8 @@ rm -rf /etc/openvpn/crl.pem
 cp /etc/openvpn/easy-rsa/pki/crl.pem /etc/openvpn/crl.pem
 chown nobody:$GROUPNAME /etc/openvpn/crl.pem
 userdel --force $user
-rm -rf /etc/VpsPackdir/senha/$user
-rm -rf /etc/VpsPackdir/limite/$user
+rm -rf /etc/r3v1v3r/senha/$user
+rm -rf /etc/r3v1v3r/limite/$user
 sleep 1s
 done 
 tput sgr0 
@@ -355,23 +371,23 @@ exit
 ;;
 6)
 cat /etc/passwd |grep ovpn > /tmp/ovpn
-echo -e "\033[1;33mUSUÁRIOS"
+echo -e "\033[1;33mUSUÃRIOS"
 SDK=$(awk -F: '{print $1}' /tmp/ovpn)
 if [ "$SDK" = "" ]
 then
-echo -e "\033[1;31mVOCE NÃO TEM USUÁRIOS PARA MUDAR A DATA!\033[0m"
+echo -e "\033[1;31mVOCE NÃƒO TEM USUÃRIOS PARA MUDAR A DATA!\033[0m"
 ovpn
 exit
  else
 echo -e "\033[1;31m_____________________________"
 awk -F: '{print $1}' /tmp/ovpn
 echo -e "\033[1;31m_____________________________"
-echo -e "\033[1;36mNOME DO USUÁRIO\033[0m"
+echo -e "\033[1;36mNOME DO USUÃRIO\033[0m"
 read -p ": " namer
-echo -e "\033[1;36mDIGITE A NOVA DATA EM NÚMEROS\033[0m"
+echo -e "\033[1;36mDIGITE A NOVA DATA EM NÃšMEROS\033[0m"
 echo -e "\033[1;36mDIA?\033[0m"
 read -p ": " dia
-echo -e "\033[1;36mMÊS?\033[0m"
+echo -e "\033[1;36mMÃŠS?\033[0m"
 read -p ": " mes
 echo -e "\033[1;36mANO?\033[0m"
 read -p ": " ano
@@ -396,7 +412,7 @@ echo -e "\033[1;33m__________________________________________\033[0m"
 echo -e "\033[1;33mVALOR A ALTERAR!"
 read -p ": " valor1
 if [ "$valor1" = "" ]; then
-echo -e "\033[1;31mNão digitou nada!!!"
+echo -e "\033[1;31mNÃ£o digitou nada!!!"
 ovpn
 exit
 fi
@@ -405,7 +421,7 @@ read -p ": " valor2
 sed -i "s/$valor1/$valor2/g" /etc/openvpn/client-common.txt
 testt=$(cat /etc/openvpn/client-common.txt |egrep -o $valor2)
 if [ "$testt" = "" ]; then
-echo -e "\033[1;31mNAO ALTERADO VOCÊ DIGITOU ERRADO O VALOR A ALTERAR!"
+echo -e "\033[1;31mNAO ALTERADO VOCÃŠ DIGITOU ERRADO O VALOR A ALTERAR!"
 sleep 5s
 else
 echo -e "\033[1;36mSUCESSO, VALOR ALTERADO!"
@@ -450,7 +466,7 @@ chmod 777 /etc/init.d/openvpn
 /etc/init.d/openvpn start
 ;;
  *)
-tput setaf 7 ; tput setab 4 ; tput bold ; printf '%44s%s%-20s\n' "OPÇÃO INVÁLIDA..." ; tput sgr0
+tput setaf 7 ; tput setab 4 ; tput bold ; printf '%44s%s%-20s\n' "OPÃ‡ÃƒO INVÃLIDA..." ; tput sgr0
 sleep 1
 exit;;
 esac
@@ -458,39 +474,39 @@ esac
 else
 	clear
 echo -e "\033[1;33m"
-echo 'OPENVPN NÃO ESTÁ INSTALADO, DESEJA CONTINUAR?'
+echo 'OPENVPN NÃƒO ESTÃ INSTALADO, DESEJA CONTINUAR?'
 echo -e "\033[0m[s/n]"
 read -p ": " sni
 case $sni in
 (n|N)
-echo -e "\033[1;31mABORTANDO INSTALAÇÃO\033[0m"
+echo -e "\033[1;31mABORTANDO INSTALAÃ‡ÃƒO\033[0m"
 sleep 4s
 exit
 exit
 ;;
 (s|S)
-mkdir /etc/VpsPackdir
-mkdir /etc/adm
-mkdir /etc/VpsPackdir/limite
-mkdir /etc/VpsPackdir/senha
-mkdir /etc/adm/modulo
+mkdir /etc/r3v1v3r
+mkdir /etc/vps
+mkdir /etc/r3v1v3r/limite
+mkdir /etc/r3v1v3r/senha
+mkdir /etc/vps/modulo
 clear
 ;;
 *)
-echo -e "\033[1;31mABORTANDO INSTALAÇÃO\033[0m"
+echo -e "\033[1;31mABORTANDO INSTALAÃ‡ÃƒO\033[0m"
 sleep 4s
 exit
 exit
 ;;
 esac
  echo -e "\033[1;31m"
-	echo "Responda às perguntas para iniciar a instalação"
+	echo "Responda Ã s perguntas para iniciar a instalaÃ§Ã£o"
 	echo "Responda corretamente"
 	echo ""
-echo -e "\033[1;33mPrimeiro precisaremos do ip de sua máquina,este ip está correto?\033[0m"
-	read -p "Endereço IP: " -e -i $IP IP
+echo -e "\033[1;33mPrimeiro precisaremos do ip de sua mÃ¡quina,este ip estÃ¡ correto?\033[0m"
+	read -p "EndereÃ§o IP: " -e -i $IP IP
 	echo ""
-echo -e "\033[1;31mQual protocolo você deseja usar para às conexões OPENVPN?"
+echo -e "\033[1;31mQual protocolo vocÃª deseja usar para Ã s conexÃµes OPENVPN?"
 echo -e "\033[1;33m   1) UDP"
 echo -e "   2) TCP (Recomendado)"
 echo -e "\033[0m"
@@ -510,7 +526,7 @@ echo -e "\033[0m"
 echo -e "\033[1;33mQual porta voce deseja usar ?\033[0m"
 	read -p "Port: " -e -i 1194 pt
 	echo ""
-echo -e "\033[1;31mO SCRIPT VAI VERIFICAR SE A PORTA\033[1;33m $pt\033[1;31m ESTÁ SENDO USADA, PARA EVITAR PROBLEMAS!\033[0m"
+echo -e "\033[1;31mO SCRIPT VAI VERIFICAR SE A PORTA\033[1;33m $pt\033[1;31m ESTÃ SENDO USADA, PARA EVITAR PROBLEMAS!\033[0m"
 sleep 3s
 if [[ -e /etc/ssh/sshd_config ]]; then
 var1=$(cat /etc/ssh/sshd_config |egrep -o "Port $pt" |wc -l)
@@ -562,7 +578,7 @@ exit
 fi
 PORT="$pt"
 echo -e "\033[1;33m
-Qual DNS você deseja usar?
+Qual DNS vocÃª deseja usar?
 \033[1;31m  1)\033[1;33m Sistema(Recomendado)
 \033[1;31m  2)\033[1;33m Google
 \033[1;31m  3)\033[1;33m OpenDNS
@@ -596,7 +612,7 @@ DNS="1"
  fi
 fi
 echo ""
-	echo "Agora o openvpn está pronto para ser executado "
+	echo "Agora o openvpn estÃ¡ pronto para ser executado "
 	read -n1 -r -p "Pressione qualquer tecla para continuar..."
 	if [[ "$OS" = 'debian' ]]; then
 		apt-get upgrade
@@ -732,7 +748,7 @@ exit 0' > $RCLOCAL
 	# If SELinux is enabled and a custom port or TCP was selected, we need this
 	if hash sestatus 2>/dev/null; then
 		if sestatus | grep "Current mode" | grep -qs "enforcing"; then
-			if [[ "$PORT" != '1194' || "$PROTOCOL" = 'tcp' ]]; then
+			if [[ "$PORT" != '8090' || "$PROTOCOL" = 'tcp' ]]; then
 				# semanage isn't available in CentOS 6 by default
 				if ! hash semanage 2>/dev/null; then
 					yum install policycoreutils-python -y
@@ -783,7 +799,7 @@ enec="2"
 fi
 case $enec in
 1)
-echo -e "\033[1;31mÀS CONFIGURAÇÕES GERADAS AUTOMATICAMENTE USARÃO O \033[1;33mPROXY $IP NA PORTA 80\033[1;31m DESEJA ALTERAR A PORTA?\033[0m"
+echo -e "\033[1;31mÃ€S CONFIGURAÃ‡Ã•ES GERADAS AUTOMATICAMENTE USARÃƒO O \033[1;33mPROXY $IP NA PORTA 80\033[1;31m DESEJA ALTERAR A PORTA?\033[0m"
 read -p "[s/n] 
 " portass
 if [ "$portass" = "s" ]; then
@@ -799,7 +815,7 @@ proxxy="$IP"
 fi
 ;;
 2)
-echo -e "\033[1;31mNÃO FOI IDENTIFICADO PROXY SQUID EM SUA VPS, DESEJA INSTALÁ-LO?\033[0m"
+echo -e "\033[1;31mNÃƒO FOI IDENTIFICADO PROXY SQUID EM SUA VPS, DESEJA INSTALÃ-LO?\033[0m"
 read -p "[s/n] 
 " squiid
 if [ "$squiid" = "s" ]; then
@@ -809,10 +825,10 @@ sleep 1
 sq3
 proxxy="$IP"
 else
-echo -e "\033[1;31mOK, o openvpn precisa de um PROXY para a configuração padrão, qual será o proxy?\033[0m"
+echo -e "\033[1;31mOK, o openvpn precisa de um PROXY para a configuraÃ§Ã£o padrÃ£o, qual serÃ¡ o proxy?\033[0m"
 read -p "Digite o PROXY: " proxxy
 fi
-echo -e "\033[1;31mÀS CONFIGURAÇÕES GERADAS AUTOMATICAMENTE USARÃO O \033[1;33mPROXY $proxxy NA PORTA 80\033[1;31m DESEJA ALTERAR A PORTA?\033[0m"
+echo -e "\033[1;31mÃ€S CONFIGURAÃ‡Ã•ES GERADAS AUTOMATICAMENTE USARÃƒO O \033[1;33mPROXY $proxxy NA PORTA 80\033[1;31m DESEJA ALTERAR A PORTA?\033[0m"
 read -p "[s/n] 
 " portass
 if [ "$portass" = "s" ]; then
@@ -826,12 +842,12 @@ xyz="80"
 fi
 ;;
 esac
-echo -e "\033[1;31mO HOST DO ARQUIVO PADRÃO É \033[1;33mm.facebook.com\033[1;31m DESEJA ALTERAR?\033[0m"
+echo -e "\033[1;31mO HOST DO ARQUIVO PADRÃƒO Ã‰ \033[1;33mm.facebook.com\033[1;31m DESEJA ALTERAR?\033[0m"
 read -p "[s/n]
 " sinounot
 if [ "$sinounot" = "s" ]; then
 echo -e "\033[1;31mDIGITE O NOVO HOST\033[0m"
-echo -e "\033[1;31mÉ necessário que ele comece com um .\033[0m"
+echo -e "\033[1;31mÃ‰ necessÃ¡rio que ele comece com um .\033[0m"
 echo -e "\033[1;31mExemplo: .claromusica.com/\033[0m"
 read -p "Digite o Host: " hostx
  else
@@ -862,7 +878,7 @@ auth-user-pass" > /etc/openvpn/client-common.txt
    echo -e "\033[0m"
 	echo ""
 chmod 777 /etc/init.d/openvpn
-touch /etc/adm/modulo/ovpn
+touch /etc/vps/modulo/ovpn
 echo -e "\033[1;31mOPENVPN INSTALADO COM SUCESSO!"
 echo -e "\033[01;32m ( UTILIZE O COMANDO \033[01;33m ovpn \033[01;32m para abrir o menu"
 read -p "[aperte enter] entendi..." enter
