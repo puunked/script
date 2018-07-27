@@ -126,32 +126,39 @@ exit;;
   clear
   menu;;
  13)
-  shadowsocks
-  sleep 5
+  echo"EM BREVE"
+  read -p "De enter para continuar..."
+  clear
   menu;;
  14)
-  ConfVPS14
-  sleep 5
+  echo"EM BREVE"
+  read -p "De enter para continuar..."
+  clear
   menu;;
  15)
-  ConfVPS15
-  sleep 5
+  echo"EM BREVE"
+  read -p "De enter para continuar..."
+  clear
   menu;;
  16)
-  ConfVPS16
-  sleep 5
+  echo"EM BREVE"
+  read -p "De enter para continuar..."
+  clear
   menu;;
  17)
-  ConfVPS17
-  sleep 5
+  echo"EM BREVE"
+  read -p "De enter para continuar..."
+  clear
   menu;;
  18)
-  ConfVPS18
-  sleep 5
+  echo"EM BREVE"
+  read -p "De enter para continuar..."
+  clear
   menu;;
  19)
-  ConfVPS19
-  sleep 5
+  echo"EM BREVE"
+  read -p "De enter para continuar..."
+  clear
   menu;;
  20)
   remove
