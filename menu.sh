@@ -36,7 +36,7 @@ echo -e "[10]\033[01;32m•=> » reboot         :\033[0;35m Reinicia a VPS\033[1
 echo -e "[11]\033[01;32m•=> » info           :\033[0;35m Exibe informações do sistema\033[1;33m"
 echo -e "[12]\033[01;32m•=> » sobre          :\033[0;35m Informações sobre este script\033[1;33m"
 echo -e "[13]\033[01;32m•=> » Shadowsocks    :\033[0;35m Shadowsocks (EM BREVE)\033[1;33m"
-echo -e "[14]\033[01;32m•=> » OpenVPN VIVO   :\033[0;35m OpenVPN TCP 8090 vivo.ovpn)\033[1;33m"
+echo -e "[14]\033[01;32m•=> » OpenVPN VIVO   :\033[0;35m OpenVPN TCP 8090 (EM BREVE)\033[1;33m"
 echo -e "[15]\033[01;32m•=> » TOR            :\033[0;35m Adiciona a rede TOR (EM BREVE)\033[1;33m"
 echo -e "[16]\033[01;32m•=> » KernelControl  :\033[0;35m Procura ATT para Kernel Remove\033[1;33m"
 echo -e "[17]\033[01;32m•=> » VNC            :\033[0;35m Ativa Interface Gráfica Servidor\033[1;33m"
@@ -111,9 +111,8 @@ exit;;
   clear
   menu;;
  10)
-  reboot
-  sleep 5
-  menu;;
+  shutdown -r now
+  exit0;;
  11)
   info
   echo""
