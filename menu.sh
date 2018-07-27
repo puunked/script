@@ -212,8 +212,10 @@ exit;;
   service sslh stop 2>/dev/null
   echo "Retirando R3V1V3R...100%"
   rm -rf /bin/reboot   2>/dev/null
-  echo "Finalizando..."
+  echo -e "Finalizando..."
+  echo -e ".............."
+  read -p "De enter para finalizar...
   rm -rf /usr/bin/menu 2>/dev/null
-  echo ".............."
+  echo ""
   clear;;  
 esac
