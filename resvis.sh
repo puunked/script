@@ -7,7 +7,7 @@ echo -e "\033[01;36m       BY: @judiba
        Data de Atualização: 27/07/2018 
        Nome: R3V1V3R       \033[1;33m"
 echo ""
-read -p "De enter para continuar..."
+sleep 5
 clear
 netstat -nlpt
 echo ""
@@ -30,67 +30,77 @@ case $opcao in
  echo "Reiniciando serviço Dropbear..."
  sleep 5
  service dropbear restart
+ resvis
 clear
-exit;; 
+exit 1;;
  1)
  clear
  echo "Reiniciando serviço OpenVPN..."
  sleep 5
  service openvpn restart
 clear
-exit;;
+resvis;;
  2)
  clear
  echo "Reiniciando serviço SSH..."
  sleep 5
- service ssh restart
+ service sshd restart
 clear
-exit;;
+resvis;;
  3)
  clear
  echo "Reiniciando serviço SSLH..."
  sleep 5
  service sslh restart
 clear
-exit;;
+resvis;;
  4)
  clear
  echo "Reiniciando serviço STUNNEL..."
  sleep 5
- service dropbear restart
-clear
-exit;;
+ service stunnel4 restart
+ clear
+resvis;;
  5)
  clear
  echo "Reiniciando serviço SQUID3..."
  sleep 5
- service dropbear restart
+ service squid3 restart
 clear
-exit;;
+resvis;;
  6)
  clear
  echo "Reiniciando serviço WEBMIN..."
  sleep 5
- service dropbear restart
+ service webmin restart
 clear
-exit;;
+resvis;;
  7)
  clear
  echo "Reiniciando TODOS OS SERVIÇOS..."
+ echo "Reiniciando serviço SSH..."
+ echo "Reiniciando serviço DROPBEAR..."
+ echo "Reiniciando serviço STUNNEL..."
+ echo "Reiniciando serviço SSLH..."
+ echo "Reiniciando serviço SQUID..."
+ echo "Reiniciando serviço OPENVPN..."
+ echo "Reiniciando serviço WEBMIN..."
  sleep 5
+ service sshd restart
  service dropbear restart
- service openvpn restart
- service ssh restart
- service sslh restart
  service stunnel4 restart
+ service sslh restart
  service squid3 restart
+ service openvpn restart
  service webmin restart
  clear
- exit;;
+ resvis;;
  8)
+ clear
  ifconfig
-sleep 10 
+read -p "Precione ENTER para continuar..."
+ clear
 resvis;;
  9)
- exit;;
+ menu;;
 esac
