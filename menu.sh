@@ -42,21 +42,18 @@ echo -e "[16]\033[01;32m•=> » KernelControl  :\033[0;35m Procura ATT para Ker
 echo -e "[17]\033[01;32m•=> » VNC            :\033[0;35m Ativa Interface Gráfica Servidor\033[1;33m"
 echo -e "[18]\033[01;32m•=> » Security       :\033[0;35m Firewall e Torrent\033[1;33m"
 echo -e "[19]\033[01;32m•=> » DadosMonitor   :\033[0;35m Uso de Dados/Banda|in||out|\033[1;33m"
-echo -e "[20]\033[01;32m•=> » R3M0V3 R3V1V3R :\033[0;35m Remove este script\033[01;33m"
+echo -e "[20]\033[01;32m•=> » R3M0V3 R3V1V3R :\033[0;35m Remove este script\033[01;37m"
 echo 
 read -p "Selecione uma opção [00-20]: "  opcao
 echo "" 
 case $opcao in
  00)
  clear
- echo "saindo..."
- sleep 5
-clear
-exit;; 
+exit 1;; 
  01)
   clear
  echo "voltando..."
-  sleep 5
+  sleep 2
   clear
   menu;;
  02)
@@ -111,8 +108,10 @@ exit;;
   clear
   menu;;
  10)
-  shutdown -r now
-  exit0;;
+  clear
+  echo "reiniciando..."
+  reboot
+  exit 2;;
  11)
   info
   echo""
@@ -217,5 +216,6 @@ exit;;
   echo "Finalizando..."
   echo ".............."
   rm -rf /usr/bin/menu 2>/dev/null
-  clear;;  
+  clear
+  exit 0;;  
 esac
