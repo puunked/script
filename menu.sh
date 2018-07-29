@@ -18,6 +18,7 @@ purpleClaro="\033[1;35m"
 cyanClaro="\033[1;36m"
 branco="\033[1;37m"
 clear
+echo -e "\033[1;37m"
 tput setaf 8 ; tput setab 5 ; tput bold ; printf '%35s%s%-25s\n' "R3V1V3R" ; tput sgr0
 echo ""
 echo -e "\033[01;34m                    R3V1V3R 1NT3RNET L1VR3      \033[1;33m"
@@ -42,10 +43,10 @@ echo -e "[16]\033[01;32m•=> » KernelControl  :\033[0;35m Procura ATT para Ker
 echo -e "[17]\033[01;32m•=> » VNC            :\033[0;35m Ativa Interface Gráfica Servidor\033[1;33m"
 echo -e "[18]\033[01;32m•=> » Security       :\033[0;35m Firewall e Torrent\033[1;33m"
 echo -e "[19]\033[01;32m•=> » DadosMonitor   :\033[0;35m Uso de Dados/Banda|in||out|\033[1;33m"
-echo -e "[20]\033[01;32m•=> » R3M0V3 R3V1V3R :\033[0;35m Remove este script\033[01;37m"
+echo -e "[20]\033[01;32m•=> » R3M0V3 R3V1V3R :\033[0;35m Remove este script\033[01;33m"
 echo 
 read -p "Selecione uma opção [00-20]: "  opcao
-echo "" 
+echo -e "\033[01;32m" 
 case $opcao in
  00)
  clear
@@ -58,9 +59,9 @@ exit 1;;
   menu;;
  02)
   user-add
- echo""
+  echo ""
   read -p "De enter para continuar..."
- clear
+  clear
   menu;;
  03)
  clear
