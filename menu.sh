@@ -17,8 +17,9 @@ azulClaro="\033[1;34m"
 purpleClaro="\033[1;35m"
 cyanClaro="\033[1;36m"
 branco="\033[1;37m"
-clear
+
 echo -e "\033[1;37m"
+clear
 tput setaf 8 ; tput setab 5 ; tput bold ; printf '%35s%s%-25s\n' "R3V1V3R" ; tput sgr0
 echo ""
 echo -e "\033[01;34m                    R3V1V3R 1NT3RNET L1VR3      \033[1;33m"
@@ -206,16 +207,18 @@ exit 1;;
   service openvpn stop 2>/dev/null
   echo "Retirando R3V1V3R...97%"
   service nginx stop 2>/dev/null
-  echo "Retirando R3V1V3R...98%"
-  service squid3 stop 2>/dev/null
-  echo "Retirando R3V1V3R...99%"
-  service sslh stop 2>/dev/null
+  echo -e "Retirando R3V1V3R...98%"
+  echo -e "Retirando R3V1V3R...99%"
   echo "Retirando R3V1V3R...100%"
+  echo "Finalizando..."
+  echo ".............."
+  echo "Finalizando..."
+  echo ".............."
+  service squid3 stop 2>/dev/null
+  service sslh stop 2>/dev/null
   rm -rf /etc/payloads 2>/dev/null
-  echo "Finalizando..."
-  echo ".............."
-  echo "Finalizando..."
-  echo ".............."
+  rm -rf ddos-deflate-master
+  rm -rf dropbear-2018.76
   rm -rf /usr/bin/menu 2>/dev/null
   clear
   exit 0;;  
