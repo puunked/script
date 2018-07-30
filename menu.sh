@@ -132,9 +132,16 @@ exit 1;;
   clear
   menu;;
  14)
-  ovpn
-  read -p "De enter para continuar..."
+  echo -e "\033[01;32m INICIANDO....."
+  sleep 1
   clear
+  echo -e "\033[01;31m INSTALANDO O OPENVPN..."
+  clear
+  rm /bin/ovpn/ &>/dev/null
+  wget -O /bin/ovpn -o /dev/null https://raw.githubusercontent.com/redeviver/ovpn/master/ovpn
+  chmod +x /bin/ovpn
+  clear
+  ovpn
   menu;;
  15)
   echo -e "EM BREVE"
