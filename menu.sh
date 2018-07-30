@@ -201,6 +201,7 @@ exit 1;;
   echo "Retirando R3V1V3R...70%"
   echo "Retirando R3V1V3R...75%"
   killall -9 badvpn-udpgw
+  killall -9 Xtightvnc
   echo "Retirando R3V1V3R...80%"
   service webmin stop
   echo "Retirando R3V1V3R...85%"
