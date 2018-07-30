@@ -190,25 +190,21 @@ exit 1;;
   echo "Retirando R3V1V3R...60%"
   rm -rf /bin/DadosMonitor 2>/dev/null
   echo "Retirando R3V1V3R...65%"
-  rm -rf /bin/ConfVPS13.sh 2>/dev/null
+  service stunnel4 stop
   echo "Retirando R3V1V3R...70%"
-  rm -rf /bin/ConfVPS14.sh 2>/dev/null
   echo "Retirando R3V1V3R...75%"
-  rm -rf /bin/ConfVPS15.sh 2>/dev/null
+  killall -9 badvpn-udpgw
   echo "Retirando R3V1V3R...80%"
-  rm -rf /bin/ConfVPS16.sh 2>/dev/null
+  service webmin stop
   echo "Retirando R3V1V3R...85%"
-  rm -rf /bin/ConfVPS17.sh 2>/dev/null
   echo "Retirando R3V1V3R...90%"
-  rm -rf /bin/ConfVPS18.sh 2>/dev/null
   echo "Retirando R3V1V3R...95%"
-  rm -rf /bin/ConfVPS19.sh 2>/dev/null
   echo "Retirando R3V1V3R...96%"
   service openvpn stop 2>/dev/null
-  echo "Retirando R3V1V3R...97%"
+  echo -e "Retirando R3V1V3R...97%\033[0;31m"
   service nginx stop 2>/dev/null
-  echo -e "Retirando R3V1V3R...98%"
-  echo -e "Retirando R3V1V3R...99%"
+  echo "Retirando R3V1V3R...98%"
+  echo "Retirando R3V1V3R...99%"
   echo "Retirando R3V1V3R...100%"
   echo "Finalizando..."
   echo ".............."
@@ -219,6 +215,7 @@ exit 1;;
   rm -rf /etc/payloads 2>/dev/null
   rm -rf ddos-deflate-master
   rm -rf dropbear-2018.76
+  rm -rf log-install.txt
   rm -rf /usr/bin/menu 2>/dev/null
   clear
   exit 0;;  
