@@ -154,9 +154,7 @@ exit 1;;
   clear
   menu;;
  17)
-  VNC
-  echo""
-  read -p "De enter para continuar..."
+  vnc
   clear
   menu;;
  18)
