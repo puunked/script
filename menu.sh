@@ -154,7 +154,8 @@ exit 1;;
   clear
   menu;;
  17)
-  echo -e "EM BREVE"
+  VNC
+  echo""
   read -p "De enter para continuar..."
   clear
   menu;;
