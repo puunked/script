@@ -49,64 +49,60 @@ echo
 read -p "Selecione uma opção [00-20]: "  opcao
 echo -e "\033[01;32m" 
 case $opcao in
- 00)
- clear
+  00)
+  clear
 exit 1;; 
  01)
   clear
- echo "voltando..."
+  echo "voltando..."
   sleep 2
   clear
   menu;;
  02)
   user-add
   echo ""
-  read -p "De enter para continuar..."
+  read -p "De enter para ir ao menu..."
   clear
   menu;;
  03)
- clear
- trial
- echo""
-  read -p "De enter para continuar..."
- clear
+  trial
+  echo ""
+  read -p "De enter para ir ao menu..."
+  clear
   menu;;
  04)
   user-del
-  echo""
-  read -p "De enter para continuar..."
- clear
+  echo ""
+  read -p "De enter para ir ao menu..."
+  clear
   menu;;
  05)
   clear
   user-login
- echo""
-  read -p "De enter para continuar..."
- clear
+  echo ""
+  read -p "De enter para ir ao menu..."
+  clear
   menu;;
  06)
-  clear
   user-list
- echo""
-  read -p "De enter para continuar..."
- clear
+  echo ""
+  read -p "De enter para ir ao menu..."
+  clear
   menu;;
  07)
   expdel
- echo""
-  read -p "De enter para continuar..."
- clear
+  echo ""
+  read -p "De enter para ir ao menu..."
+  clear
   menu;;
  08)
   resvis
-  echo""
-  read -p "De enter para continuar..."
- clear
+  clear
   menu;;
  09)
   speedtest
-  echo""
-  read -p "De enter para continuar..."
+  echo ""
+  read -p "De enter para ir ao menu..."
   clear
   menu;;
  10)
@@ -155,6 +151,7 @@ exit 1;;
   menu;;
  17)
   vnc
+  read -p "De enter para continuar..."
   clear
   menu;;
  18)
