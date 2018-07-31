@@ -22,7 +22,7 @@ echo "";
 data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
 
 echo "---------------------------";
-echo "Verificando OpenSSH logados";
+echo "Verificando SSH logados";
 echo "---------------------------";
 
 for PID in "${data[@]}"
@@ -41,6 +41,6 @@ echo "";
 echo "------------------------------------------------"
 echo " Multi Login = kill "
 echo " Como usar : kill [o número PID] "
-echo "------------------------------------------------"
-
+echo -e "=============================\n\033[01;34m"
+echo -e "R3V1V3R 1NT3RN3T L1VR3\033[01;33m"
 echo "";
