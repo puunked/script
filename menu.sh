@@ -24,7 +24,7 @@ tput setaf 8 ; tput setab 5 ; tput bold ; printf '%35s%s%-25s\n' "R3V1V3R" ; tpu
 echo ""
 echo -e "\033[01;34m                    R3V1V3R 1NT3RNET L1VR3      \033[1;33m"
 echo ""
-echo -e "[00]\033[01;32m•=> » Escolha        :\033[0;35m Para Sair ou use Ctrl + C \033[1;33m"
+echo -e "[00]\033[01;32m•=> » Escolha        :\033[0;35m Enter para Sair ou use Ctrl + C \033[1;33m"
 echo -e "[01]\033[01;32m•=> » menu           :\033[0;35m Exibe uma lista de comandos\033[1;33m"
 echo -e "[02]\033[01;32m•=> » user-add       :\033[0;35m Crie uma conta SSH & OpenVPN\033[1;33m"
 echo -e "[03]\033[01;32m•=> » trial          :\033[0;35m Crie uma conta de teste\033[1;33m"
@@ -32,7 +32,7 @@ echo -e "[04]\033[01;32m•=> » user-del       :\033[0;35m Excluir a conta SSH 
 echo -e "[05]\033[01;32m•=> » user-login     :\033[0;35m Verifique o login usuário\033[1;33m"
 echo -e "[06]\033[01;32m•=> » user-list      :\033[0;35m Lista de membros SSH & OpenVPN\033[1;33m"
 echo -e "[07]\033[01;32m•=> » expdel         :\033[0;35m Excluir usuário expirado\033[1;33m"
-echo -e "[08]\033[01;32m•=> » resvis         :\033[0;35m Reinicie todos os serviços\033[1;33m"
+echo -e "[08]\033[01;32m•=> » resvis         :\033[0;35m Reiniciar os serviços\033[1;33m"
 echo -e "[09]\033[01;32m•=> » speedtest      :\033[0;35m Speedtest VPS\033[1;33m"
 echo -e "[10]\033[01;32m•=> » reboot         :\033[0;35m Reinicia a VPS\033[1;33m"
 echo -e "[11]\033[01;32m•=> » info           :\033[0;35m Exibe informações do sistema\033[1;33m"
@@ -42,7 +42,7 @@ echo -e "[14]\033[01;32m•=> » OpenVPN        :\033[0;35m OpenVPN TCP/UDP\033[
 echo -e "[15]\033[01;32m•=> » TOR            :\033[0;35m Adiciona a rede TOR (EM BREVE)\033[1;33m"
 echo -e "[16]\033[01;32m•=> » KernelControl  :\033[0;35m Procura ATT para Kernel Remove\033[1;33m"
 echo -e "[17]\033[01;32m•=> » VNC            :\033[0;35m Ativa Interface Gráfica Servidor\033[1;33m"
-echo -e "[18]\033[01;32m•=> » Security       :\033[0;35m Firewall e Torrent\033[1;33m"
+echo -e "[18]\033[01;32m•=> » Privoxy        :\033[0;35m Proxy para rede TOR\033[1;33m"
 echo -e "[19]\033[01;32m•=> » DadosMonitor   :\033[0;35m Uso de Dados/Banda|in||out|\033[1;33m"
 echo -e "[20]\033[01;32m•=> » R3M0V3 R3V1V3R :\033[0;35m Remove este script\033[01;33m"
 echo 
@@ -168,6 +168,8 @@ exit 1;;
   menu;;
  20)
   sleep 5
+  killall -9 badvpn-udpgw
+  killall -9 Xtightvnc
   echo "Retirando R3V1V3R...1%"
   service dropbear stop 2>/dev/null
   echo "Retirando R3V1V3R...5%"
@@ -198,8 +200,6 @@ exit 1;;
   service stunnel4 stop
   echo "Retirando R3V1V3R...70%"
   echo "Retirando R3V1V3R...75%"
-  killall -9 badvpn-udpgw
-  killall -9 Xtightvnc
   echo "Retirando R3V1V3R...80%"
   service webmin stop
   echo "Retirando R3V1V3R...85%"
