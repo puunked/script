@@ -49,8 +49,8 @@ echo
 read -p "Selecione uma opção [00-20]: "  opcao
 echo -e "\033[01;32m" 
 case $opcao in
-  00)
-  clear
+ 00)
+ clear
 exit 1;; 
  01)
   clear
@@ -151,7 +151,8 @@ exit 1;;
   menu;;
  17)
   vnc
-  read -p "De enter para continuar..."
+  echo ""
+  read -p "De enter para ir ao menu..."
   clear
   menu;;
  18)
@@ -160,8 +161,9 @@ exit 1;;
   clear
   menu;;
  19)
-  echo -e "EM BREVE"
-  read -p "De enter para continuar..."
+  nload
+  clear
+  read -p "De enter para ir ao menu..."
   clear
   menu;;
  20)
