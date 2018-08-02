@@ -227,5 +227,9 @@ exit 1;;
   rm -rf log-install.txt
   rm -rf /usr/bin/menu 2>/dev/null
   clear
-  exit 0;;  
+  exit 0;;
+   *)
+tput setaf 7 ; tput setab 4 ; tput bold ; printf '%30s%s%-18s\n' "OPÇÃO INVÁLIDA..." ; tput sgr0
+ sleep 3
+ exit;;
 esac
