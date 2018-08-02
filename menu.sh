@@ -193,7 +193,7 @@ exit 1;;
   echo "Retirando R3V1V3R...50%"
   rm -rf /usr/bin/about  2>/dev/null    
   echo "Retirando R3V1V3R...55%"
-  rm -rf /bin/VNC 2>/dev/null
+  rm -rf /bin/vnc 2>/dev/null
   echo "Retirando R3V1V3R...60%"
   rm -rf /bin/DadosMonitor 2>/dev/null
   echo "Retirando R3V1V3R...65%"
@@ -221,6 +221,9 @@ exit 1;;
   rm -rf /etc/payloads 2>/dev/null
   rm -rf ddos-deflate-master
   rm -rf dropbear-2018.76
+  apt-get -y --purge remove nginx screen nload
+  rm -rf install.bash
+  rm /home/vps/public_html
   rm -rf log-install.txt
   rm -rf /usr/bin/menu 2>/dev/null
   clear
