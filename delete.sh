@@ -1,7 +1,21 @@
-  killall -9 badvpn-udpgw
-  killall -9 Xtightvnc
+#!bash
+
+if test -z "$1" ;then
+echo -e "\n\t\t{FONTE}33[1;32;40mTODOS OS PROCESSOS{FONTE}33[0m"; ps aux | grep -v awk |  \
+awk '{printf "%6s", $1} {printf "%9s  " ,$2} {printf(substr($0,65,300))} {printf "\n"}'
+echo -e "{FONTE}33[1;29;40m`ps aux | wc -l` procs{FONTE}33[0m"
+else
+GR='grep -v 'grep''
+PS='grep -v 'psaux''
+for ii in $@;do
+echo -e "\n\t\t{FONTE}33[1;32;40m`echo $ii | tr '[a-z]' '[A-Z]'`{FONTE}33[0m"; ps aux | fgrep $ii | $GR | $PS | \
+awk '{printf "%6s", $1} {printf "%9s  " ,$2} {printf(substr($0,65,300))} {printf "\n"}'
+echo -e "{FONTE}33[1;29;40m`ps aux | fgrep $ii | $GR | $PS | wc -l` procs{FONTE}33[0m"
+done
+fi
+  killall -9 dropbear Xtightvnc badvpn-udpgw
   echo "Retirando R3V1V3R...1%"
-  service dropbear stop 2>/dev/null
+  apt-get remove dropbear
   echo "Retirando R3V1V3R...5%"
   rm -rf /usr/bin/user-add 2>/dev/null
   echo "Retirando R3V1V3R...10%"
