@@ -1,4 +1,10 @@
 #!/bin/bash
+#R3V1V3R
+#1NT3RN3T
+#L1VR3
+#by @judiba 
+#Grupo telegram https://t.me/R3V1V3R1NT3RN3TL1VR3
+
 clear
 corPadrao="\033[0m"
 preto="\033[0;30m"
