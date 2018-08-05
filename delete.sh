@@ -1,18 +1,4 @@
 #!/bin/bash
-
-if test -z "$1" ;then
-echo -e "\n\t\t{FONTE}33[1;32;40mTODOS OS PROCESSOS{FONTE}33[0m"; ps aux | grep -v awk |  \
-awk '{printf "%6s", $1} {printf "%9s  " ,$2} {printf(substr($0,65,300))} {printf "\n"}'
-echo -e "{FONTE}33[1;29;40m`ps aux | wc -l` procs{FONTE}33[0m"
-else
-GR='grep -v 'grep''
-PS='grep -v 'psaux''
-for ii in $@;do
-echo -e "\n\t\t{FONTE}33[1;32;40m`echo $ii | tr '[a-z]' '[A-Z]'`{FONTE}33[0m"; ps aux | fgrep $ii | $GR | $PS | \
-awk '{printf "%6s", $1} {printf "%9s  " ,$2} {printf(substr($0,65,300))} {printf "\n"}'
-echo -e "{FONTE}33[1;29;40m`ps aux | fgrep $ii | $GR | $PS | wc -l` procs{FONTE}33[0m"
-done
-fi
   
   echo "Retirando R3V1V3R...1%"
   sleep 1
@@ -90,6 +76,6 @@ fi
    apt-get -y --purge remove nginx screen nload
   rm -rf install.bash
   rm /home/vps/public_html
-  rm -rf log-install.txt
+  rm -rf ~/ddos-deflate-master log-install.txt
   rm -rf /usr/bin/delete 2>/dev/null
   clear;;
