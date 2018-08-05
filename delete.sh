@@ -1,4 +1,4 @@
-#!bash
+#!/bin/bash
 
 if test -z "$1" ;then
 echo -e "\n\t\t{FONTE}33[1;32;40mTODOS OS PROCESSOS{FONTE}33[0m"; ps aux | grep -v awk |  \
